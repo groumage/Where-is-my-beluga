@@ -1,0 +1,32 @@
+# Gradle / Android Studio
+.gradle/
+build/
+/local.properties
+*.iml
+.idea/
+.kotlin/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Signing: never commit keystores or their passwords
+keystore.properties
+*.jks
+*.keystore
+*.p12
+*.pem
+*.key
+
+# Google service account keys, local env files
+*service-account*.json
+google-play-*.json
+credentials.json
+.env
+.env.*
+
+# OS
+.DS_Store
+
+# AI
+AGENTS.md
+.claude

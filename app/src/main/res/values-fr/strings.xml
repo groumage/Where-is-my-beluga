@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="nearest_label">Beluga en vol le plus proche</string>
+    <string name="no_beluga_in_flight">Aucun Beluga en vol</string>
+    <string name="no_beluga_in_flight_detail">Toute la flotte est au sol. Réessaie plus tard.</string>
+    <string name="loading_positions">Chargement des positions…</string>
+    <string name="locating">Localisation en cours…</string>
+    <string name="location_denied">Localisation non autorisée : touche ici pour l\'autoriser, ou fais un appui long sur la carte pour placer ta position.</string>
+    <string name="location_disabled">Localisation désactivée : touche ici pour ouvrir les réglages, ou fais un appui long sur la carte pour placer ta position.</string>
+    <string name="location_unavailable">Position introuvable : touche ici pour ouvrir les réglages (la localisation par Wi-Fi aide en intérieur), ou fais un appui long sur la carte pour placer ta position.</string>
+    <string name="manual_location">Position choisie sur la carte · touche ici pour utiliser ta localisation</string>
+    <string name="refresh_positions">Actualiser les positions</string>
+    <string name="in_flight">En vol</string>
+    <string name="in_flight_callsign">En vol · %1$s</string>
+    <string name="on_ground">Au sol</string>
+    <string name="flight">Vol %1$s</string>
+    <string name="fleet_title">Flotte Beluga</string>
+    <string name="fleet_summary">%1$d en vol</string>
+    <string name="fleet_summary_updated">%1$d en vol · maj %2$s</string>
+    <string name="altitude">Altitude : %1$s</string>
+    <string name="speed">Vitesse : %1$s</string>
+    <string name="heading">Cap : %1$s</string>
+    <string name="all_title">Tous</string>
+    <string name="all_subtitle">Voir toute la flotte</string>
+    <string name="no_signal">Pas de signal, affichés à leur base</string>
+    <string name="close">Fermer</string>
+    <string name="data_source">Données des avions : adsb.lol (ODbL) · App non officielle, sans lien avec Airbus</string>
+    <string name="error_rate_limited">Signal perdu : trop de requêtes vers adsb.lol, réessaie dans quelques minutes.</string>
+    <string name="error_rate_limited_until">Signal perdu : le quota gratuit d\'adsb.lol est épuisé. Prochain essai à %1$s.</string>
+    <string name="error_timeout">Signal perdu : adsb.lol ne répond pas.</string>
+    <string name="error_network">Signal perdu : pas de connexion Internet.</string>
+    <string name="error_server">Signal perdu : adsb.lol est indisponible.</string>
+    <string name="error_invalid_response">Signal perdu : données adsb.lol illisibles.</string>
+    <string name="alerts_enable">Activer les alertes de passage</string>
+    <string name="alerts_disable">Désactiver les alertes de passage</string>
+    <string name="alerts_enabled">Alertes activées : tu seras prévenu quand un Beluga devrait passer à moins de 5 km de toi. Vérification toutes les 15 minutes environ.</string>
+    <string name="alerts_enabled_no_location">Alertes activées, mais ta position est inconnue : autorise la localisation, ou fais un appui long sur la carte pour la placer.</string>
+    <string name="alerts_disabled">Alertes de passage désactivées.</string>
+    <string name="alerts_denied">Notifications refusées : les alertes de passage restent désactivées.</string>
+    <string name="pass_channel_name">Passages de Beluga</string>
+    <string name="pass_channel_description">Un Beluga va passer à moins de 5 km de toi</string>
+    <string name="pass_title">%1$s arrive près de toi</string>
+    <string name="pass_soon">Il devrait passer à environ %1$s de toi dans %2$d min environ (vers %3$s).</string>
+    <string name="pass_now">Il passe en ce moment à environ %1$s de toi. Lève les yeux !</string>
+    <string name="pass_soon_overhead">Il devrait passer juste au-dessus de toi dans %1$d min environ (vers %2$s).</string>
+    <string name="pass_now_overhead">Il passe juste au-dessus de toi en ce moment. Lève les yeux !</string>
+</resources>

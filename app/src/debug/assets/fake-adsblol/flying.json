@@ -1,0 +1,6 @@
+{"ac": [
+  {"hex": "395d68", "flight": "BGA123Y ", "alt_baro": 30000, "gs": 430.5, "track": 18.0, "lat": 46.91, "lon": 1.52, "seen_pos": 0.4, "seen": 0.1},
+  {"hex": "395d67", "flight": "BGA134H ", "alt_baro": 28000, "gs": 416.0, "track": 61.0, "lat": 52.78, "lon": 4.61, "seen_pos": 1.2, "seen": 0.3},
+  {"hex": "395d6d", "flight": "BGA781K ", "alt_baro": 25000, "gs": 399.1, "track": 212.0, "lat": 40.62, "lon": -3.42, "seen_pos": 0.9, "seen": 0.2},
+  {"hex": "395d66", "flight": "BGA102A ", "alt_baro": "ground", "gs": 0.0, "true_heading": 236.0, "lat": 53.536, "lon": 9.835, "seen_pos": 3.0, "seen": 1.0}
+], "msg": "No error", "now": 1794661962500, "total": 4}

@@ -1,0 +1,5 @@
+{"ac": [
+  {"hex": "395d68", "flight": "BGA123Y ", "alt_baro": 9000, "gs": 400.0, "track": 180.0, "lat": 43.79, "lon": 1.444, "seen_pos": 0.4, "seen": 0.1},
+  {"hex": "395d6d", "flight": "BGA131N ", "alt_baro": 30000, "gs": 400.0, "track": 180.0, "lat": 44.50, "lon": 1.470, "seen_pos": 0.8, "seen": 0.2},
+  {"hex": "395d67", "flight": "BGA134H ", "alt_baro": 28000, "gs": 416.0, "track": 61.0, "lat": 52.78, "lon": 4.61, "seen_pos": 1.2, "seen": 0.3}
+], "msg": "No error", "now": 1794661962500, "total": 3}

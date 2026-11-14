@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Beluga silhouette for the status bar: Android only uses the shape (alpha), not the colour.
+     Same drawing as assets/source/beluga.svg, cropped to the aircraft. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="820"
+    android:viewportHeight="820">
+    <group
+        android:translateX="-120"
+        android:translateY="-115">
+        <path android:fillColor="#FFFFFFFF" android:pathData="M770,470 L840,290 L910,290 L905,560 Z" />
+        <path android:fillColor="#FFFFFFFF" android:pathData="M150,600 C150,540 200,520 250,510 C260,390 370,330 500,330 C650,330 760,390 870,500 L905,560 C880,600 840,620 780,625 L230,640 C180,640 150,625 150,600 Z" />
+        <path android:fillColor="#FFFFFFFF" android:pathData="M440,600 L620,600 L560,760 L500,760 Z" />
+    </group>
+</vector>

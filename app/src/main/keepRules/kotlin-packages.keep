@@ -1,0 +1,5 @@
+# With optimization.packageScope limited to androidx/kotlin/kotlinx, R8 9.5.1 moved
+# kotlin.sequences.SequencesKt___SequencesJvmKt to the root package but left its
+# package-private superclass in kotlin.sequences: the release build then crashed
+# at startup with IllegalAccessError. Keeping Kotlin's package names avoids it.
+-keeppackagenames kotlin.**

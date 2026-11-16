@@ -1,6 +1,6 @@
 # Where is my Beluga — Privacy policy / Politique de confidentialité
 
-_Last updated / Dernière mise à jour : 2026-11-14_
+_Last updated / Dernière mise à jour : 2026-11-16_
 
 [English](#english) · [Français](#français)
 

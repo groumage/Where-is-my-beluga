@@ -38,7 +38,7 @@ never your location.
 **Nothing else.** The app has no account, no advertising, no analytics and no
 tracking. We do not collect, store, sell or share any personal data.
 
-**Contact.** CONTACT_EMAIL
+**Contact.** play-store-master@proton.me
 
 ## Français
 

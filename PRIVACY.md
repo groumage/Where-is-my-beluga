@@ -18,7 +18,7 @@ to your real location.
 
 **Pass alerts.** If you turn on pass alerts (bell button), the app checks
 about every 15 minutes, in the background, whether a Beluga is about to pass
-within 5 km of you, and shows a notification. For this it keeps on your device
+within the distance you chose (5 to 25 km), and shows a notification. For this it keeps on your device
 the last approximate position found while the app was open (or the one you set
 by hand). This check happens entirely on your phone: your position is never
 sent. Turning alerts off stops the checks.
@@ -56,7 +56,8 @@ uniquement sur ton appareil, jusqu'à ce que tu touches le bandeau pour revenir
 
 **Alertes de passage.** Si tu actives les alertes (bouton cloche),
 l'application vérifie en arrière-plan, environ toutes les 15 minutes, si un
-Beluga va passer à moins de 5 km de toi, et t'envoie une notification. Pour
+Beluga va passer à moins de la distance que tu as choisie (5 à 25 km), et
+t'envoie une notification. Pour
 cela, elle garde sur ton appareil la dernière position approximative trouvée
 quand l'application était ouverte (ou celle que tu as placée à la main). Cette
 vérification se fait entièrement sur ton téléphone : ta position n'est jamais

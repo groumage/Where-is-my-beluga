@@ -147,6 +147,13 @@ internal class MapHolder(
     private var userLocation: Coordinate? = null
     private var insets = MapInsets(0, 0)
 
+    /**
+     * Point last centered with [center], kept centered in the free space while the
+     * panels open or close (the detail card appears just after the tap), until
+     * the user moves the map.
+     */
+    private var focus: Coordinate? = null
+
     val mapView: MapView
 
     init {
@@ -167,6 +174,9 @@ internal class MapHolder(
             map.uiSettings.isTiltGesturesEnabled = false
             map.uiSettings.isCompassEnabled = false
             applyInsets()
+            map.addOnCameraMoveStartedListener { reason ->
+                if (reason == MapLibreMap.OnCameraMoveStartedListener.REASON_API_GESTURE) focus = null
+            }
             map.addOnCameraIdleListener {
                 val position = map.cameraPosition
                 val target = position.target ?: return@addOnCameraIdleListener
@@ -175,7 +185,12 @@ internal class MapHolder(
             map.addOnMapClickListener { point ->
                 val hit = map.queryRenderedFeatures(map.projection.toScreenLocation(point), MARKER_LAYER)
                 val key = hit.firstOrNull()?.getStringProperty("key")
-                if (key != null) onMarkerClick(key) else onMapClick()
+                if (key != null) {
+                    onMarkerClick(key)
+                } else {
+                    focus = null
+                    onMapClick()
+                }
                 true
             }
             map.addOnMapLongClickListener { point ->
@@ -214,6 +229,7 @@ internal class MapHolder(
         if (insets == this.insets) return
         this.insets = insets
         applyInsets()
+        focus?.let(::center)
     }
 
     /** Keeps the OpenStreetMap attribution visible, just above the bottom panel. */
@@ -256,11 +272,20 @@ internal class MapHolder(
         )
     }
 
+    /** Centers [position] in the space left free by the panels. */
     fun center(position: Coordinate) {
-        map?.animateCamera(CameraUpdateFactory.newLatLngZoom(position.toLatLng(), AIRCRAFT_ZOOM), ANIMATION_MS)
+        focus = position
+        // Explicit padding: otherwise the camera keeps whatever padding the last fit() left.
+        val camera = CameraPosition.Builder()
+            .target(position.toLatLng())
+            .zoom(AIRCRAFT_ZOOM)
+            .padding(0.0, insets.top.toDouble(), 0.0, insets.bottom.toDouble())
+            .build()
+        map?.animateCamera(CameraUpdateFactory.newCameraPosition(camera), ANIMATION_MS)
     }
 
     fun fit(points: List<Coordinate>) {
+        focus = null
         val distinct = points.distinct()
         when {
             distinct.isEmpty() -> Unit

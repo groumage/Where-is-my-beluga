@@ -319,22 +319,26 @@ fun MapScreen(viewModel: FleetViewModel = viewModel()) {
                     parked.firstOrNull { it.key == markerKeyFor(selectedEntry) }
                 else -> null
             }
-            if (selectedGroup != null) {
-                ParkedDetailCard(selectedGroup, onClose = { viewModel.select(Selection.None) })
-            } else if (selectedEntry != null) {
-                AircraftDetailCard(selectedEntry, onClose = { viewModel.select(Selection.None) })
+            // The detail card counts as covered map too: a selected aircraft must stay above it.
+            Column(Modifier.onSizeChanged { bottomInset = it.height }) {
+                if (selectedGroup != null) {
+                    ParkedDetailCard(selectedGroup, onClose = { viewModel.select(Selection.None) })
+                } else if (selectedEntry != null) {
+                    AircraftDetailCard(selectedEntry, onClose = { viewModel.select(Selection.None) })
+                }
+                FleetPanel(
+                    state = state,
+                    nearestIcao24 = nearestIcao24,
+                    onSelect = ::selectEntry,
+                    onSelectAll = {
+                        viewModel.select(Selection.All)
+                        controller.fit(markers.map { it.position })
+                    },
+                    onToggleAlerts = ::onToggleAlerts,
+                    onOpenSettings = { settingsOpen = true },
+                    onAlertRadiusChange = viewModel::setAlertRadiusKm,
+                )
             }
-            FleetPanel(
-                state = state,
-                nearestIcao24 = nearestIcao24,
-                onSelect = ::selectEntry,
-                onSelectAll = {
-                    viewModel.select(Selection.All)
-                    controller.fit(markers.map { it.position })
-                },
-                onToggleAlerts = ::onToggleAlerts,
-                modifier = Modifier.onSizeChanged { bottomInset = it.height },
-            )
         }
     }
 }

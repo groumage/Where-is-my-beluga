@@ -11,6 +11,7 @@ import com.whereismybeluga.data.FleetEntry
 import com.whereismybeluga.data.NearestBeluga
 import com.whereismybeluga.data.AdsbLolErrorKind
 import com.whereismybeluga.data.AdsbLolException
+import com.whereismybeluga.data.ManualRefresh
 import com.whereismybeluga.data.PollSchedule
 import com.whereismybeluga.data.findNearestInFlight
 import com.whereismybeluga.data.liveStatesSource
@@ -109,9 +110,11 @@ class FleetViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     /** Refresh asked by the user: skipped if the data is very recent or adsb.lol said to wait. */
-    fun refresh() {
+    fun refresh(): ManualRefresh {
         refreshLocation()
-        if (schedule.canRefreshNow(SystemClock.elapsedRealtime())) launchPolling(fetchNow = true)
+        val result = schedule.manualRefresh(SystemClock.elapsedRealtime())
+        if (result == ManualRefresh.ALLOWED) launchPolling(fetchNow = true)
+        return result
     }
 
     private fun launchPolling(fetchNow: Boolean) {
@@ -212,6 +215,12 @@ class FleetViewModel(application: Application) : AndroidViewModel(application) {
     fun setAlertsEnabled(enabled: Boolean) {
         if (enabled) PassAlerts.enable(getApplication()) else PassAlerts.disable(getApplication())
         _state.update { it.copy(alertsEnabled = enabled) }
+    }
+
+    fun setAlertRadiusKm(radiusKm: Int) {
+        if (radiusKm == _state.value.alertRadiusKm) return
+        PassAlerts.setRadiusKm(getApplication(), radiusKm)
+        _state.update { it.copy(alertRadiusKm = PassAlerts.radiusKm(getApplication())) }
     }
 
     fun select(selection: Selection) {

@@ -75,6 +75,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.whereismybeluga.R
 import com.whereismybeluga.data.FleetEntry
 import com.whereismybeluga.data.AdsbLolErrorKind
+import com.whereismybeluga.data.ManualRefresh
 import com.whereismybeluga.data.ParkedGroup
 import com.whereismybeluga.data.markerKeyFor
 import com.whereismybeluga.data.splitFleet
@@ -279,7 +280,14 @@ fun MapScreen(viewModel: FleetViewModel = viewModel()) {
                     onClick = { if (nearest != null) selectEntry(nearest.entry) else onLocationCardClick() },
                     modifier = Modifier.weight(1f),
                 )
-                RefreshButton(refreshing = state.refreshing, onClick = viewModel::refresh)
+                RefreshButton(
+                    refreshing = state.refreshing,
+                    onClick = {
+                        if (viewModel.refresh() == ManualRefresh.TOO_SOON) {
+                            showMessage(R.string.next_update_soon, long = false)
+                        }
+                    },
+                )
             }
             if (state.manualLocation != null) ManualLocationBanner(onReset = viewModel::clearManualLocation)
             state.error?.let { ErrorBanner(it, state.rateLimitedUntilMillis) }

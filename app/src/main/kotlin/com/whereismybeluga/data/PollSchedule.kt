@@ -14,6 +14,16 @@ const val MIN_MANUAL_REFRESH_MS = 30_000L
 /** Wait used after a rate-limit answer that does not say how long to wait. */
 const val DEFAULT_RATE_LIMIT_BACKOFF_MS = 10 * 60_000L
 
+enum class ManualRefresh {
+    ALLOWED,
+
+    /** The last request is under [MIN_MANUAL_REFRESH_MS] old: the next scheduled one is under a minute away. */
+    TOO_SOON,
+
+    /** adsb.lol asked to wait; the error banner already says until when. */
+    RATE_LIMITED,
+}
+
 /**
  * Decides when the next adsb.lol request may go out. Times are milliseconds
  * from a monotonic clock (e.g. SystemClock.elapsedRealtime), never wall time.
@@ -34,11 +44,11 @@ class PollSchedule(
         return max(0L, max(nextRegular, blockedUntil ?: now) - now)
     }
 
-    /** True if a refresh asked by the user may send a request right away. */
-    fun canRefreshNow(now: Long): Boolean {
-        val blocked = blockedUntil?.let { now < it } ?: false
-        val tooSoon = lastRequestAt?.let { now - it < minManualRefreshMs } ?: false
-        return !blocked && !tooSoon
+    /** Whether a refresh asked by the user may send a request right away, and if not, why. */
+    fun manualRefresh(now: Long): ManualRefresh = when {
+        blockedUntil?.let { now < it } == true -> ManualRefresh.RATE_LIMITED
+        lastRequestAt?.let { now - it < minManualRefreshMs } == true -> ManualRefresh.TOO_SOON
+        else -> ManualRefresh.ALLOWED
     }
 
     fun onRequest(now: Long) {

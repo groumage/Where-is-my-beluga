@@ -4,8 +4,17 @@ import kotlin.math.cos
 import kotlin.math.hypot
 import kotlin.math.sin
 
-/** A pass alert fires when a Beluga is predicted to come this close (horizontal distance). */
-const val PASS_RADIUS_KM = 5.0
+/**
+ * A pass alert fires when a Beluga is predicted to come within the radius the
+ * user picked among these (horizontal distance, in km).
+ */
+val PASS_RADIUS_CHOICES_KM = listOf(5, 10, 15, 20, 25)
+
+const val DEFAULT_PASS_RADIUS_KM = 5
+
+/** A radius read from storage: anything but one of the choices falls back to the default. */
+fun passRadiusOrDefault(storedKm: Int): Int =
+    if (storedKm in PASS_RADIUS_CHOICES_KM) storedKm else DEFAULT_PASS_RADIUS_KM
 
 /**
  * How far ahead passes are predicted: a little more than the 15-minute
@@ -56,7 +65,7 @@ fun predictPass(entry: FleetEntry, from: Coordinate, horizonMinutes: Double = PA
 fun predictPasses(
     entries: List<FleetEntry>,
     from: Coordinate,
-    radiusKm: Double = PASS_RADIUS_KM,
+    radiusKm: Double = DEFAULT_PASS_RADIUS_KM.toDouble(),
     horizonMinutes: Double = PASS_HORIZON_MINUTES,
 ): List<PredictedPass> =
     entries

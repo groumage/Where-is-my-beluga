@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- City-level precision is enough to find the nearest Beluga: no precise location. -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!-- Pass alerts ("a Beluga is about to pass within 5 km"). -->
+    <!-- Pass alerts ("a Beluga is about to pass near you"). -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <!-- WorkManager, which runs the background pass check, also adds WAKE_LOCK,
          RECEIVE_BOOT_COMPLETED and ACCESS_NETWORK_STATE: install-time permissions,

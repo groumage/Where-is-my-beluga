@@ -16,7 +16,7 @@ private const val RECHECK_BEFORE_PASS_MINUTES = 2.0
 
 /**
  * Background check: fetches the fleet once, predicts which Beluga will pass
- * within 5 km of the user in the next 20 minutes, and notifies.
+ * within the chosen radius of the user in the next 20 minutes, and notifies.
  */
 class PassCheckWorker(context: Context, params: WorkerParameters) : CoroutineWorker(context, params) {
     override suspend fun doWork(): Result {
@@ -36,7 +36,7 @@ class PassCheckWorker(context: Context, params: WorkerParameters) : CoroutineWor
             return Result.success()
         }
         val entries = BELUGA_FLEET.map { FleetEntry(it, live[it.icao24]) }
-        val passes = predictPasses(entries, from)
+        val passes = predictPasses(entries, from, radiusKm = PassAlerts.radiusKm(context).toDouble())
 
         val notifier = PassNotifier(context)
         for (pass in passes) {

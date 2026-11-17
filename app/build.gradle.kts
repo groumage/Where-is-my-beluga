@@ -20,11 +20,13 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.whereismybeluga"
+        // Fixed by the app already on Google Play: never change it. The code package
+        // (namespace above) is unrelated and keeps its shorter name.
+        applicationId = "com.app.whereismybeluga"
         minSdk = 28
         targetSdk = 37
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.1.0"
     }
 
     signingConfigs {
@@ -55,6 +57,13 @@ android {
             }
         }
     }
+    bundle {
+        // The language can be picked in the app: ship every language to every phone,
+        // not only the phone's own (Google Play's default split).
+        language {
+            enableSplit = false
+        }
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -62,6 +71,10 @@ android {
     buildFeatures {
         buildConfig = true
         compose = true
+    }
+    testOptions {
+        // Needed by AGP's Compose Preview tasks: see androidComponents below.
+        unitTests.isIncludeAndroidResources = true
     }
 }
 
@@ -89,4 +102,15 @@ dependencies {
     testImplementation(libs.junit)
     // android.jar only ships stubs of org.json: unit tests need the real one.
     testImplementation(libs.json)
+}
+
+// AGP registers a Compose Preview task (generate<Variant>ComposePreviewRunfiles) for
+// every variant when Compose is on, with no switch to turn it off. Creating it fails
+// unless the variant has unit tests that include Android resources, which breaks
+// `./gradlew tasks` (it creates every task to list them). Unit tests are off for
+// release by default: turn them on.
+androidComponents {
+    beforeVariants(selector().withBuildType("release")) {
+        it.hostTests[com.android.build.api.variant.HostTestBuilder.UNIT_TEST_TYPE]?.enable = true
+    }
 }

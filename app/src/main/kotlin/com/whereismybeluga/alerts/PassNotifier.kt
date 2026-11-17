@@ -16,7 +16,8 @@ import com.whereismybeluga.MainActivity
 import com.whereismybeluga.R
 import com.whereismybeluga.data.BELUGA_FLEET
 import com.whereismybeluga.data.PredictedPass
-import com.whereismybeluga.ui.formatDistance
+import com.whereismybeluga.settings.AppSettings
+import com.whereismybeluga.ui.formatPassDistance
 import java.text.DateFormat
 import java.util.Date
 import kotlin.math.abs
@@ -40,7 +41,11 @@ private const val EXPIRE_AFTER_PASS_MS = 10 * 60_000L
  * not shown again for that pass.
  */
 class PassNotifier(context: Context) {
-    private val context = context.applicationContext
+    // Notification texts follow the language picked in the app's settings.
+    private val context = AppSettings(context).run {
+        applyDefaultLocale()
+        localizedContext(context.applicationContext)
+    }
     private val manager = NotificationManagerCompat.from(this.context)
     private val systemManager = this.context.getSystemService(NotificationManager::class.java)
 
@@ -64,7 +69,7 @@ class PassNotifier(context: Context) {
         val time = DateFormat.getTimeInstance(DateFormat.SHORT).format(Date(passAt))
         // The user's position is only approximate: no point in "66 m".
         val overhead = pass.closestKm < OVERHEAD_KM
-        val distance = formatDistance(pass.closestKm)
+        val distance = formatPassDistance(pass.closestKm)
         val text = when {
             minutes < 1 && overhead -> context.getString(R.string.pass_now_overhead)
             minutes < 1 -> context.getString(R.string.pass_now, distance)

@@ -32,6 +32,12 @@
     <string name="error_network">Signal perdu : pas de connexion Internet.</string>
     <string name="error_server">Signal perdu : adsb.lol est indisponible.</string>
     <string name="error_invalid_response">Signal perdu : données adsb.lol illisibles.</string>
+    <string name="settings">Paramètres</string>
+    <string name="settings_theme">Thème</string>
+    <string name="settings_theme_light">Clair</string>
+    <string name="settings_theme_dark">Sombre</string>
+    <string name="settings_language">Langue</string>
+    <string name="settings_follow_phone">Téléphone</string>
     <string name="alerts_enable">Activer les alertes de passage</string>
     <string name="alerts_disable">Désactiver les alertes de passage</string>
     <string name="alerts_enabled">Alertes activées : tu seras prévenu quand un Beluga devrait passer à moins de 5 km de toi. Vérification toutes les 15 minutes environ.</string>

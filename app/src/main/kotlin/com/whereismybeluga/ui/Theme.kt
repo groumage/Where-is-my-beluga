@@ -75,7 +75,7 @@ private val DarkColors = BelugaColors(
 
 val LocalBelugaColors = staticCompositionLocalOf { LightColors }
 
-/** Follows the device's light/dark setting. */
+/** Light or dark as the configuration says: the phone's setting, unless the app's settings override it. */
 @Composable
 fun BelugaTheme(content: @Composable () -> Unit) {
     val dark = isSystemInDarkTheme()

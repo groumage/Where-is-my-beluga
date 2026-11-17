@@ -17,6 +17,9 @@ import com.whereismybeluga.data.findNearestInFlight
 import com.whereismybeluga.data.liveStatesSource
 import com.whereismybeluga.location.LocationProvider
 import com.whereismybeluga.location.LocationStore
+import com.whereismybeluga.settings.AppSettings
+import com.whereismybeluga.settings.LanguageChoice
+import com.whereismybeluga.settings.ThemeChoice
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -66,6 +69,8 @@ data class FleetUiState(
     val selection: Selection = Selection.None,
     /** Background "Beluga passing within 5 km" notifications. */
     val alertsEnabled: Boolean = false,
+    val theme: ThemeChoice = ThemeChoice.SYSTEM,
+    val language: LanguageChoice = LanguageChoice.SYSTEM,
 ) {
     val flyingCount: Int get() = entries.count { it.isFlying }
 
@@ -84,7 +89,13 @@ class FleetViewModel(application: Application) : AndroidViewModel(application) {
     private val locationStore = LocationStore(application)
 
     private val _state = MutableStateFlow(
-        FleetUiState(manualLocation = locationStore.manual, alertsEnabled = PassAlerts.isEnabled(application)),
+        FleetUiState(
+            manualLocation = locationStore.manual,
+            alertsEnabled = PassAlerts.isEnabled(application),
+            alertRadiusKm = PassAlerts.radiusKm(application),
+            theme = settings.theme,
+            language = settings.language,
+        ),
     )
     val state: StateFlow<FleetUiState> = _state.asStateFlow()
 
@@ -221,6 +232,18 @@ class FleetViewModel(application: Application) : AndroidViewModel(application) {
         if (radiusKm == _state.value.alertRadiusKm) return
         PassAlerts.setRadiusKm(getApplication(), radiusKm)
         _state.update { it.copy(alertRadiusKm = PassAlerts.radiusKm(getApplication())) }
+    }
+
+    /** Saved at once; shown once the activity is recreated. */
+    fun setTheme(theme: ThemeChoice) {
+        settings.theme = theme
+        _state.update { it.copy(theme = theme) }
+    }
+
+    /** Saved at once; shown once the activity is recreated. */
+    fun setLanguage(language: LanguageChoice) {
+        settings.language = language
+        _state.update { it.copy(language = language) }
     }
 
     fun select(selection: Selection) {

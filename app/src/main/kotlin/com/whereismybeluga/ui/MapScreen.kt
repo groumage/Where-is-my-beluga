@@ -237,12 +237,36 @@ fun MapScreen(viewModel: FleetViewModel = viewModel()) {
         )
     }
 
+    // Saveable: the dialog stays open while a new theme or language recreates the activity.
+    var settingsOpen by rememberSaveable { mutableStateOf(false) }
+
     var topInset by remember { mutableIntStateOf(0) }
     var bottomInset by remember { mutableIntStateOf(0) }
 
     fun selectEntry(entry: FleetEntry) {
         viewModel.select(Selection.Aircraft(entry.aircraft.icao24))
         controller.center(entry.displayedPosition)
+    }
+
+    if (settingsOpen) {
+        SettingsDialog(
+            theme = state.theme,
+            language = state.language,
+            // The choice is a configuration override read when the activity starts.
+            onThemeChange = {
+                if (it != state.theme) {
+                    viewModel.setTheme(it)
+                    activity?.recreate()
+                }
+            },
+            onLanguageChange = {
+                if (it != state.language) {
+                    viewModel.setLanguage(it)
+                    activity?.recreate()
+                }
+            },
+            onClose = { settingsOpen = false },
+        )
     }
 
     Box(Modifier.fillMaxSize()) {

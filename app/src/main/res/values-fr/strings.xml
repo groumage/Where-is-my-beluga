@@ -24,7 +24,8 @@
     <string name="all_subtitle">Voir toute la flotte</string>
     <string name="no_signal">Pas de signal, affichés à leur base</string>
     <string name="close">Fermer</string>
-    <string name="data_source">Données des avions : adsb.lol (ODbL) · App non officielle, sans lien avec Airbus</string>
+    <string name="data_source">Données : adsb.lol (ODbL) · Non officielle, sans lien avec Airbus</string>
+    <string name="next_update_soon">Trop tôt pour envoyer une nouvelle requête : prochaine mise à jour dans moins d\'1 min.</string>
     <string name="error_rate_limited">Signal perdu : trop de requêtes vers adsb.lol, réessaie dans quelques minutes.</string>
     <string name="error_rate_limited_until">Signal perdu : le quota gratuit d\'adsb.lol est épuisé. Prochain essai à %1$s.</string>
     <string name="error_timeout">Signal perdu : adsb.lol ne répond pas.</string>

@@ -25,7 +25,8 @@
     <string name="all_subtitle">Show the whole fleet</string>
     <string name="no_signal">No live signal, shown at home base</string>
     <string name="close">Close</string>
-    <string name="data_source">Aircraft data: adsb.lol (ODbL) · Unofficial app, not affiliated with Airbus</string>
+    <string name="data_source">Data: adsb.lol (ODbL) · Unofficial, not affiliated with Airbus</string>
+    <string name="next_update_soon">Too soon to send a new request: next update in less than 1 min.</string>
     <string name="error_rate_limited">Signal lost: too many requests to adsb.lol, try again in a few minutes.</string>
     <string name="error_rate_limited_until">Signal lost: the free adsb.lol quota is used up. Next try at %1$s.</string>
     <string name="error_timeout">Signal lost: adsb.lol is not responding.</string>

@@ -40,12 +40,13 @@
     <string name="settings_follow_phone">Téléphone</string>
     <string name="alerts_enable">Activer les alertes de passage</string>
     <string name="alerts_disable">Désactiver les alertes de passage</string>
-    <string name="alerts_enabled">Alertes activées : tu seras prévenu quand un Beluga devrait passer à moins de 5 km de toi. Vérification toutes les 15 minutes environ.</string>
+    <string name="alerts_enabled">Alertes activées : tu seras prévenu quand un Beluga devrait passer à moins de %1$d km de toi. Vérification toutes les 15 minutes environ.</string>
     <string name="alerts_enabled_no_location">Alertes activées, mais ta position est inconnue : autorise la localisation, ou fais un appui long sur la carte pour la placer.</string>
+    <string name="alert_radius">Alerte à moins de %1$d km</string>
     <string name="alerts_disabled">Alertes de passage désactivées.</string>
     <string name="alerts_denied">Notifications refusées : les alertes de passage restent désactivées.</string>
     <string name="pass_channel_name">Passages de Beluga</string>
-    <string name="pass_channel_description">Un Beluga va passer à moins de 5 km de toi</string>
+    <string name="pass_channel_description">Un Beluga va passer près de toi</string>
     <string name="pass_title">%1$s arrive près de toi</string>
     <string name="pass_soon">Il devrait passer à environ %1$s de toi dans %2$d min environ (vers %3$s).</string>
     <string name="pass_now">Il passe en ce moment à environ %1$s de toi. Lève les yeux !</string>

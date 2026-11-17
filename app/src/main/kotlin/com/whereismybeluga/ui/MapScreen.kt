@@ -141,11 +141,11 @@ fun MapScreen(viewModel: FleetViewModel = viewModel()) {
     val resources = LocalResources.current
     val scope = rememberCoroutineScope()
     /** [long] for messages worth reading twice; any message closes with a tap or its cross. */
-    fun showMessage(@StringRes message: Int, long: Boolean = true) {
+    fun showMessage(@StringRes message: Int, vararg args: Any, long: Boolean = true) {
         scope.launch {
             snackbar.currentSnackbarData?.dismiss()
             snackbar.showSnackbar(
-                resources.getString(message),
+                resources.getString(message, *args),
                 withDismissAction = true,
                 duration = if (long) SnackbarDuration.Long else SnackbarDuration.Short,
             )
@@ -154,7 +154,11 @@ fun MapScreen(viewModel: FleetViewModel = viewModel()) {
 
     fun enableAlerts() {
         viewModel.setAlertsEnabled(true)
-        showMessage(if (state.userLocation == null) R.string.alerts_enabled_no_location else R.string.alerts_enabled)
+        if (state.userLocation == null) {
+            showMessage(R.string.alerts_enabled_no_location)
+        } else {
+            showMessage(R.string.alerts_enabled, state.alertRadiusKm)
+        }
     }
 
     val notificationLauncher = rememberLauncherForActivityResult(

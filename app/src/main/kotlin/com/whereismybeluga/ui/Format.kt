@@ -10,6 +10,14 @@ fun formatDistance(km: Double, locale: Locale = Locale.getDefault()): String = w
     else -> NumberFormat.getIntegerInstance(locale).format(km.roundToInt()) + " km"
 }
 
+/**
+ * Distance of a predicted pass, in whole kilometres (at least 1): the user's
+ * position is only approximate and the prediction assumes a straight line, so
+ * a decimal would be false precision.
+ */
+fun formatPassDistance(km: Double, locale: Locale = Locale.getDefault()): String =
+    NumberFormat.getIntegerInstance(locale).format(km.roundToInt().coerceAtLeast(1)) + " km"
+
 fun formatAltitude(meters: Double?, locale: Locale = Locale.getDefault()): String =
     meters?.let { NumberFormat.getIntegerInstance(locale).format(it.roundToInt()) + " m" } ?: "—"
 

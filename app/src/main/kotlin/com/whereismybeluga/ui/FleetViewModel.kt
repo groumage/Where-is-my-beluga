@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.whereismybeluga.alerts.PassAlerts
 import com.whereismybeluga.data.BELUGA_FLEET
 import com.whereismybeluga.data.Coordinate
+import com.whereismybeluga.data.DEFAULT_PASS_RADIUS_KM
 import com.whereismybeluga.data.FleetEntry
 import com.whereismybeluga.data.NearestBeluga
 import com.whereismybeluga.data.AdsbLolErrorKind
@@ -67,8 +68,10 @@ data class FleetUiState(
     val manualLocation: Coordinate? = null,
     val locationStatus: LocationStatus = LocationStatus.LOADING,
     val selection: Selection = Selection.None,
-    /** Background "Beluga passing within 5 km" notifications. */
+    /** Background "Beluga passing nearby" notifications. */
     val alertsEnabled: Boolean = false,
+    /** How close a Beluga must pass to be announced, in km. */
+    val alertRadiusKm: Int = DEFAULT_PASS_RADIUS_KM,
     val theme: ThemeChoice = ThemeChoice.SYSTEM,
     val language: LanguageChoice = LanguageChoice.SYSTEM,
 ) {
@@ -87,6 +90,7 @@ class FleetViewModel(application: Application) : AndroidViewModel(application) {
     private val schedule = PollSchedule()
 
     private val locationStore = LocationStore(application)
+    private val settings = AppSettings(application)
 
     private val _state = MutableStateFlow(
         FleetUiState(

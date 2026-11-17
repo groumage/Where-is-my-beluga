@@ -43,12 +43,13 @@
     <string name="settings_language_french" translatable="false">Français</string>
     <string name="alerts_enable">Turn on pass alerts</string>
     <string name="alerts_disable">Turn off pass alerts</string>
-    <string name="alerts_enabled">Pass alerts on: you will be notified when a Beluga should pass within 5 km of you. Checked about every 15 minutes.</string>
+    <string name="alerts_enabled">Pass alerts on: you will be notified when a Beluga should pass within %1$d km of you. Checked about every 15 minutes.</string>
     <string name="alerts_enabled_no_location">Pass alerts on, but your position is unknown: allow location, or long-press the map to set it.</string>
+    <string name="alert_radius">Alert within %1$d km</string>
     <string name="alerts_disabled">Pass alerts off.</string>
     <string name="alerts_denied">Notifications not allowed: pass alerts stay off.</string>
     <string name="pass_channel_name">Beluga passes</string>
-    <string name="pass_channel_description">A Beluga is about to pass within 5 km of you</string>
+    <string name="pass_channel_description">A Beluga is about to pass near you</string>
     <string name="pass_title">%1$s is coming your way</string>
     <string name="pass_soon">Expected to pass about %1$s from you in about %2$d min (around %3$s).</string>
     <string name="pass_now">Passing about %1$s from you right now. Look up!</string>

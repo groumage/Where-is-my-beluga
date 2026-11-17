@@ -4,6 +4,7 @@ import com.whereismybeluga.data.BELUGA_FLEET
 import com.whereismybeluga.data.Coordinate
 import com.whereismybeluga.data.FleetEntry
 import com.whereismybeluga.data.LiveState
+import com.whereismybeluga.data.passRadiusOrDefault
 import com.whereismybeluga.data.predictPass
 import com.whereismybeluga.data.predictPasses
 import org.junit.Assert.assertEquals
@@ -60,6 +61,31 @@ class PassPredictionTest {
         val wide = flying(user.latitude + 24 / 111.195, user.longitude + 0.2, track = 180.0)
         val passes = predictPasses(listOf(later, wide, sooner), user)
         assertEquals(listOf(sooner, later), passes.map { it.entry })
+    }
+
+    @Test
+    fun widerRadiusAlsoKeepsPlanesPassingFurtherAway() {
+        // Both fly due south; one passes overhead, the other 12 km to the east.
+        val east = 12 / (111.195 * kotlin.math.cos(Math.toRadians(user.latitude)))
+        val overhead = flying(user.latitude + 24 / 111.195, user.longitude, track = 180.0)
+        val offset = flying(user.latitude + 60 / 111.195, user.longitude + east, track = 180.0)
+        val fleet = listOf(overhead, offset)
+        assertEquals(listOf(overhead), predictPasses(fleet, user, radiusKm = 5.0).map { it.entry })
+        assertEquals(listOf(overhead), predictPasses(fleet, user, radiusKm = 10.0).map { it.entry })
+        assertEquals(listOf(overhead, offset), predictPasses(fleet, user, radiusKm = 15.0).map { it.entry })
+        assertEquals(listOf(overhead, offset), predictPasses(fleet, user, radiusKm = 25.0).map { it.entry })
+    }
+
+    @Test
+    fun storedRadiusOutsideTheChoicesFallsBackToTheDefault() {
+        assertEquals(5, passRadiusOrDefault(5))
+        assertEquals(15, passRadiusOrDefault(15))
+        assertEquals(25, passRadiusOrDefault(25))
+        assertEquals(5, passRadiusOrDefault(0))
+        assertEquals(5, passRadiusOrDefault(12))
+        assertEquals(5, passRadiusOrDefault(30))
+        assertEquals(5, passRadiusOrDefault(-10))
+        assertEquals(5, passRadiusOrDefault(Int.MAX_VALUE))
     }
 
     @Test

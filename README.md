@@ -21,10 +21,12 @@ carry aircraft parts between Airbus plants.
   (Toulouse-Blagnac).
 - The bell in the panel turns on **pass alerts**: about every 15 minutes, even
   with the app closed, the app extends the track of each Beluga in flight and
-  sends a notification if one should pass within 5 km in the next 20 minutes.
+  sends a notification if one should pass within the radius you pick (5 to
+  25 km, slider under the bell) in the next 20 minutes.
   It checks again 2 minutes before the predicted pass.
-- The app is in French when that is the phone's language, in English
-  otherwise, and follows the system light/dark theme.
+- By default the app follows the phone: French when that is its language,
+  English otherwise, and the system light/dark theme. The ⚙ button next to the
+  bell opens the settings, where both can be picked by hand.
 - The map is drawn by [MapLibre](https://maplibre.org) with
   [OpenFreeMap](https://openfreemap.org) tiles (OpenStreetMap data): no API
   key, no Google services.
